@@ -1,13 +1,14 @@
 {
-    "title":"石一聪的博客",
-    "subTitle":"学习记录 | Rust OS | 日本留学",
+    "title":"Rust & OS",
+    "subTitle":"学习笔记 | 操作系统 | 技术探索",
     "avatarUrl":"https://github.githubassets.com/favicons/favicon.svg",
     "GMEEK_VERSION":"last",
     "i18n":"CN",
     "UTC":8,
-    "startSite":"03/09/2026",
     "onePageListNum":10,
     "urlMode":"pinyin",
     "showPostSource":1,
-    "bottomText":"欢迎来到我的学习笔记"
+    "themeMode":"manual",
+    "dayTheme":"light",
+    "nightTheme":"dark_colorblind"
 }
