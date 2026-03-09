@@ -20,7 +20,20 @@ fn fill_vec(mut vec: Vec<i32>) -> Vec<i32> {
 }
 
 ```
-注意 mut加的 位置所代表的不同含义。">
+注意 mut加的 位置所代表的不同含义
+# 结构体快速赋值
+```rs
+        // TODO: Create your own order using the update syntax and template above!
+        // 两种方式 一种是 变量名相同的情况下 不需要 额外 声明键值
+
+        // update syntax
+        let your_order = Order {
+            name: 'Hacker in Rust'.to_string(),
+
+            ..order_template
+        };
+
+```。">
 <meta property="og:title" content="rust 拾">
 <meta property="og:description" content="# mut 的不同位置
 ```rs
@@ -32,7 +45,20 @@ fn fill_vec(mut vec: Vec<i32>) -> Vec<i32> {
 }
 
 ```
-注意 mut加的 位置所代表的不同含义。">
+注意 mut加的 位置所代表的不同含义
+# 结构体快速赋值
+```rs
+        // TODO: Create your own order using the update syntax and template above!
+        // 两种方式 一种是 变量名相同的情况下 不需要 额外 声明键值
+
+        // update syntax
+        let your_order = Order {
+            name: 'Hacker in Rust'.to_string(),
+
+            ..order_template
+        };
+
+```。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://985025074.github.io/post/rust%20-shi.html">
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
@@ -110,7 +136,17 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
     vec
 <span class="pl-kos">}</span></pre></div>
-<p>注意 mut加的 位置所代表的不同含义</p></div>
+<p>注意 mut加的 位置所代表的不同含义</p>
+<h1>结构体快速赋值</h1>
+<div class="highlight highlight-source-rust"><pre class="notranslate">        <span class="pl-c">// TODO: Create your own order using the update syntax and template above!</span>
+        <span class="pl-c">// 两种方式 一种是 变量名相同的情况下 不需要 额外 声明键值</span>
+
+        <span class="pl-c">// update syntax</span>
+        <span class="pl-k">let</span> your_order = <span class="pl-smi">Order</span> <span class="pl-kos">{</span>
+            <span class="pl-c1">name</span><span class="pl-kos">:</span> <span class="pl-s">"Hacker in Rust"</span><span class="pl-kos">.</span><span class="pl-en">to_string</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
+
+            ..order_template
+        <span class="pl-kos">}</span><span class="pl-kos">;</span></pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
