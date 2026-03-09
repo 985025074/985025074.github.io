@@ -33,6 +33,21 @@ fn fill_vec(mut vec: Vec<i32>) -> Vec<i32> {
             ..order_template
         };
 
+```
+# enum 给予类型
+总共两种 （） 和 「」
+```rs
+#[derive(Debug)]
+enum Message {
+    // TODO: Define the different variants used below.
+    Resize { width: u32, height: u32 },
+    Move(Point),
+    Echo(String),
+    ChangeColor(u32, u32, u32),
+    Quit,
+}
+
+
 ```。">
 <meta property="og:title" content="rust 拾">
 <meta property="og:description" content="# mut 的不同位置
@@ -57,6 +72,21 @@ fn fill_vec(mut vec: Vec<i32>) -> Vec<i32> {
 
             ..order_template
         };
+
+```
+# enum 给予类型
+总共两种 （） 和 「」
+```rs
+#[derive(Debug)]
+enum Message {
+    // TODO: Define the different variants used below.
+    Resize { width: u32, height: u32 },
+    Move(Point),
+    Echo(String),
+    ChangeColor(u32, u32, u32),
+    Quit,
+}
+
 
 ```。">
 <meta property="og:type" content="article">
@@ -146,7 +176,19 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
             <span class="pl-c1">name</span><span class="pl-kos">:</span> <span class="pl-s">"Hacker in Rust"</span><span class="pl-kos">.</span><span class="pl-en">to_string</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
 
             ..order_template
-        <span class="pl-kos">}</span><span class="pl-kos">;</span></pre></div></div>
+        <span class="pl-kos">}</span><span class="pl-kos">;</span></pre></div>
+<h1>enum 给予类型</h1>
+<p>总共两种 （） 和 「」</p>
+<div class="highlight highlight-source-rust"><pre class="notranslate"><span class="pl-c1">#<span class="pl-kos">[</span>derive<span class="pl-kos">(</span><span class="pl-v">Debug</span><span class="pl-kos">)</span><span class="pl-kos">]</span></span>
+<span class="pl-k">enum</span> <span class="pl-smi">Message</span> <span class="pl-kos">{</span>
+    <span class="pl-c">// TODO: Define the different variants used below.</span>
+    <span class="pl-v">Resize</span> <span class="pl-kos">{</span> <span class="pl-c1">width</span><span class="pl-kos">:</span> <span class="pl-smi">u32</span><span class="pl-kos">,</span> <span class="pl-c1">height</span><span class="pl-kos">:</span> <span class="pl-smi">u32</span> <span class="pl-kos">}</span><span class="pl-kos">,</span>
+    <span class="pl-v">Move</span><span class="pl-kos">(</span><span class="pl-smi">Point</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
+    <span class="pl-v">Echo</span><span class="pl-kos">(</span><span class="pl-smi">String</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
+    <span class="pl-v">ChangeColor</span><span class="pl-kos">(</span><span class="pl-smi">u32</span><span class="pl-kos">,</span> <span class="pl-smi">u32</span><span class="pl-kos">,</span> <span class="pl-smi">u32</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
+    <span class="pl-v">Quit</span><span class="pl-kos">,</span>
+<span class="pl-kos">}</span>
+</pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>

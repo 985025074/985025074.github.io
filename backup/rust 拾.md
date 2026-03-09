@@ -22,3 +22,18 @@ fn fill_vec(mut vec: Vec<i32>) -> Vec<i32> {
         };
 
 ```
+# enum 给予类型
+总共两种 （） 和 「」
+```rs
+#[derive(Debug)]
+enum Message {
+    // TODO: Define the different variants used below.
+    Resize { width: u32, height: u32 },
+    Move(Point),
+    Echo(String),
+    ChangeColor(u32, u32, u32),
+    Quit,
+}
+
+
+```
