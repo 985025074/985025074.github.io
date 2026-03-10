@@ -48,7 +48,20 @@ enum Message {
 }
 
 
-```。">
+```
+# Option
+Option 的match
+```
+# move out or not ? derterminate it!
+match option_here{
+Some or orthers}
+
+```
+# dyn and box
+可以分开理解：
+
+Box 是什么
+Box<T> 是 堆上分配 的智能指针。">
 <meta property="og:title" content="rust 拾">
 <meta property="og:description" content="# mut 的不同位置
 ```rs
@@ -88,7 +101,20 @@ enum Message {
 }
 
 
-```。">
+```
+# Option
+Option 的match
+```
+# move out or not ? derterminate it!
+match option_here{
+Some or orthers}
+
+```
+# dyn and box
+可以分开理解：
+
+Box 是什么
+Box<T> 是 堆上分配 的智能指针。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://985025074.github.io/post/rust%20-shi.html">
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
@@ -188,7 +214,78 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     <span class="pl-v">ChangeColor</span><span class="pl-kos">(</span><span class="pl-smi">u32</span><span class="pl-kos">,</span> <span class="pl-smi">u32</span><span class="pl-kos">,</span> <span class="pl-smi">u32</span><span class="pl-kos">)</span><span class="pl-kos">,</span>
     <span class="pl-v">Quit</span><span class="pl-kos">,</span>
 <span class="pl-kos">}</span>
-</pre></div></div>
+</pre></div>
+<h1>Option</h1>
+<p>Option 的match</p>
+<pre class="notranslate"><code class="notranslate"># move out or not ? derterminate it!
+match option_here{
+Some or orthers}
+
+</code></pre>
+<h1>dyn and box</h1>
+<p>可以分开理解：</p>
+<p>Box 是什么<br>
+Box 是 堆上分配 的智能指针。</p>
+<p>意思是：</p>
+<p>值本体放在 heap<br>
+栈上只放一个指针<br>
+Box 拥有这个值的所有权<br>
+例如：</p>
+<p>let x = Box::new(123);<br>
+这里：</p>
+<p>123 放在堆上<br>
+x 是一个 Box<br>
+常见用途：</p>
+<p>数据太大，不想直接放栈上<br>
+需要递归类型<br>
+需要装 dyn Trait<br>
+dyn 是什么<br>
+dyn Trait 表示：</p>
+<p>“某个实现了这个 trait 的具体类型，但先不告诉你它到底是什么。”</p>
+<p>例如：</p>
+<p>dyn Error<br>
+意思是：</p>
+<p>它一定实现了 Error<br>
+但具体可能是 ParseIntError<br>
+也可能是 io::Error<br>
+也可能是自定义错误<br>
+这叫 trait object。</p>
+<p>为什么常一起写：Box<br>
+因为 dyn Error 的具体类型不确定，编译期大小也不确定，不能直接写：</p>
+<p>let e: dyn Error;<br>
+所以要放到某种指针后面，比如：</p>
+<p>&amp;dyn Error<br>
+Box<br>
+其中：</p>
+<p>&amp;dyn Error：借用<br>
+Box：拥有这个错误对象<br>
+所以：</p>
+<p>Box&lt;dyn Error&gt;<br>
+就是：</p>
+<p>“一个放在堆上的、实现了 Error trait 的某个具体错误值。”</p>
+<p>一个直观类比<br>
+Box<br>
+像“盒子”</p>
+<p>盒子里装一个值<br>
+盒子拥有它<br>
+dyn<br>
+像“接口类型”</p>
+<p>只要求“符合某个接口”<br>
+不要求提前知道具体类型<br>
+结合你前面的例子</p>
+<p>fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt;<br>
+意思是：</p>
+<p>成功返回 ()<br>
+失败返回“某种错误”<br>
+这个错误具体类型不固定<br>
+只要实现了 Error 就行<br>
+用 Box 把它装起来统一返回<br>
+一句话<br>
+Box：把 T 放到堆上，并拥有它<br>
+dyn Trait：某个实现了这个 trait 的未知具体类型<br>
+Box：在堆上装一个实现了该 trait 的对象<br>
+如果需要，可以继续讲 为什么 dyn 会涉及动态分发。</p>
+<p>GPT-5.4 • 1x</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
