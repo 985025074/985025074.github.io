@@ -134,4 +134,107 @@ dyn Trait：某个实现了这个 trait 的未知具体类型
 Box<dyn Trait>：在堆上装一个实现了该 trait 的对象
 如果需要，可以继续讲 为什么 dyn 会涉及动态分发。
 
-GPT-5.4 • 1x
+# rust string的生命周期
+注意！ 裸的string 那确实是‘static 但是中间转换如to_str()获得的不是！ 跟随原始变量
+```rs
+fn main() {
+    let raw_str = "hello!";
+    let string_str = String::from("hello!");
+    // does nothing lsp告诉我们。可以看到 他的生命周期不由我们管辖
+    drop(raw_str);
+    let get_ref_string = &string_str;
+    drop(string_str);
+    println!("{}", get_ref_string);
+
+    println!("Hello, world!");
+}
+```
+**tip**: 注意 assert_eq貌似 str和 string都能等
+Rust 里字符串“相加”主要是这条规则：
+# 字符串相加规则
+1. String + &str
++ 的签名本质上是：
+
+所以：
+
+左边必须是 String
+右边必须是 &str
+左边会被 move
+返回新的 String
+例子
+这里：
+
+a 被移动，之后不能再用
+b 是 &str
+c 是新的 String
+2. 不能直接 String + String
+这样不行：
+
+因为右边需要 &str，不是 String。
+
+要改成：
+
+3. &str + &str 也不行
+因为左边不是 String：
+
+可以先转成 String：
+
+4. 连续相加
+规则还是一样：
+
+每次左边那个 String 被 move
+右边借用成 &str
+5. 更推荐的方式
+如果只是拼接，常用这些：
+
+push_str
+format!
+format! 不会 move 原来的字符串值本体，通常更直观。
+
+一句话
+Rust 字符串相加规则就是：
+
+左 String，右 &str
+左边会被 move
+结果是新的 String
+如果需要，可以继续补一张 String / &String / &str 的对照表。
+
+# trait 以及函数签名
+fn test(self)->Self
+真正定义的是 类型！返回以及参数 是mut self只是影响内部的可变性 不影响函数签名 也就是trait
+```rs
+trait test {
+fn cc(){
+}
+
+}
+```
+# impl trait
+函数签名中输入实现trait的类型 两种区别（与box + dyn）
+
+```rs
+impl Licensed 是什么
+在参数位置：
+`fn compare_license_types(software1: impl Licensed, software2: impl Licensed) -> bool`
+基本等价于：
+`fn compare_license_types<T1: Licensed, T2: Licensed>(software1: T1, software2: T2) -> bool`
+特点：
+静态分发
+编译期知道具体类型
+不需要 Box
+不需要堆分配
+每种具体类型会生成对应代码
+这里两个参数甚至可以是 不同类型：
+SomeSoftware
+OtherSoftware
+都可以。
+```
+## 而后者是
+动态分发
+编译期不知道具体类型，只知道“实现了 Licensed”
+通常要用 Box 装起来
+Box 会涉及堆分配
+运行时通过 vtable 调方法
+todo 
+
+**支持+语法**

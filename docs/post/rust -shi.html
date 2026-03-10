@@ -285,7 +285,97 @@ Box：把 T 放到堆上，并拥有它<br>
 dyn Trait：某个实现了这个 trait 的未知具体类型<br>
 Box：在堆上装一个实现了该 trait 的对象<br>
 如果需要，可以继续讲 为什么 dyn 会涉及动态分发。</p>
-<p>GPT-5.4 • 1x</p></div>
+<h1>rust string的生命周期</h1>
+<p>注意！ 裸的string 那确实是‘static 但是中间转换如to_str()获得的不是！ 跟随原始变量</p>
+<div class="highlight highlight-source-rust"><pre class="notranslate"><span class="pl-k">fn</span> <span class="pl-en">main</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-k">let</span> raw_str = <span class="pl-s">"hello!"</span><span class="pl-kos">;</span>
+    <span class="pl-k">let</span> string_str = <span class="pl-smi">String</span><span class="pl-kos">::</span><span class="pl-en">from</span><span class="pl-kos">(</span><span class="pl-s">"hello!"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-c">// does nothing lsp告诉我们。可以看到 他的生命周期不由我们管辖</span>
+    <span class="pl-en">drop</span><span class="pl-kos">(</span>raw_str<span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-k">let</span> get_ref_string = <span class="pl-c1">&amp;</span>string_str<span class="pl-kos">;</span>
+    <span class="pl-en">drop</span><span class="pl-kos">(</span>string_str<span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"{}"</span><span class="pl-kos">,</span> get_ref_string<span class="pl-kos">)</span><span class="pl-kos">;</span>
+
+    <span class="pl-en">println</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-s">"Hello, world!"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
+<p><strong>tip</strong>: 注意 assert_eq貌似 str和 string都能等<br>
+Rust 里字符串“相加”主要是这条规则：</p>
+<h1>字符串相加规则</h1>
+<ol>
+<li>String + &amp;str</li>
+</ol>
+<ul>
+<li>的签名本质上是：</li>
+</ul>
+<p>所以：</p>
+<p>左边必须是 String<br>
+右边必须是 &amp;str<br>
+左边会被 move<br>
+返回新的 String<br>
+例子<br>
+这里：</p>
+<p>a 被移动，之后不能再用<br>
+b 是 &amp;str<br>
+c 是新的 String<br>
+2. 不能直接 String + String<br>
+这样不行：</p>
+<p>因为右边需要 &amp;str，不是 String。</p>
+<p>要改成：</p>
+<ol start="3">
+<li>&amp;str + &amp;str 也不行<br>
+因为左边不是 String：</li>
+</ol>
+<p>可以先转成 String：</p>
+<ol start="4">
+<li>连续相加<br>
+规则还是一样：</li>
+</ol>
+<p>每次左边那个 String 被 move<br>
+右边借用成 &amp;str<br>
+5. 更推荐的方式<br>
+如果只是拼接，常用这些：</p>
+<p>push_str<br>
+format!<br>
+format! 不会 move 原来的字符串值本体，通常更直观。</p>
+<p>一句话<br>
+Rust 字符串相加规则就是：</p>
+<p>左 String，右 &amp;str<br>
+左边会被 move<br>
+结果是新的 String<br>
+如果需要，可以继续补一张 String / &amp;String / &amp;str 的对照表。</p>
+<h1>trait 以及函数签名</h1>
+<p>fn test(self)-&gt;Self<br>
+真正定义的是 类型！返回以及参数 是mut self只是影响内部的可变性 不影响函数签名 也就是trait</p>
+<div class="highlight highlight-source-rust"><pre class="notranslate"><span class="pl-k">trait</span> <span class="pl-smi">test</span> <span class="pl-kos">{</span>
+<span class="pl-k">fn</span> <span class="pl-en">cc</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+<span class="pl-kos">}</span>
+
+<span class="pl-kos">}</span></pre></div>
+<h1>impl trait</h1>
+<p>函数签名中输入实现trait的类型 两种区别（与box + dyn）</p>
+<div class="highlight highlight-source-rust"><pre class="notranslate"><span class="pl-k">impl</span> <span class="pl-v">Licensed</span> 是什么
+在参数位置：
+`<span class="pl-k">fn</span> <span class="pl-smi">compare_license_types</span><span class="pl-kos">(</span><span class="pl-s1">software1</span><span class="pl-kos">:</span> <span class="pl-k">impl</span> <span class="pl-smi">Licensed</span><span class="pl-kos">,</span> <span class="pl-s1">software2</span><span class="pl-kos">:</span> <span class="pl-k">impl</span> <span class="pl-smi">Licensed</span><span class="pl-kos">)</span> -&gt; <span class="pl-smi">bool</span>`
+基本等价于：
+`<span class="pl-k">fn</span> <span class="pl-smi">compare_license_types</span><span class="pl-kos">&lt;</span><span class="pl-smi">T1</span><span class="pl-kos">:</span> <span class="pl-smi">Licensed</span><span class="pl-kos">,</span> <span class="pl-smi">T2</span><span class="pl-kos">:</span> <span class="pl-smi">Licensed</span><span class="pl-kos">&gt;</span><span class="pl-kos">(</span><span class="pl-s1">software1</span><span class="pl-kos">:</span> <span class="pl-smi">T1</span><span class="pl-kos">,</span> <span class="pl-s1">software2</span><span class="pl-kos">:</span> <span class="pl-smi">T2</span><span class="pl-kos">)</span> -&gt; <span class="pl-smi">bool</span>`
+特点：
+静态分发
+编译期知道具体类型
+不需要 <span class="pl-v">Box</span>
+不需要堆分配
+每种具体类型会生成对应代码
+这里两个参数甚至可以是 不同类型：
+<span class="pl-v">SomeSoftware</span>
+<span class="pl-v">OtherSoftware</span>
+<span class="pl-smi">都可以</span>。</pre></div>
+<h2>而后者是</h2>
+<p>动态分发<br>
+编译期不知道具体类型，只知道“实现了 Licensed”<br>
+通常要用 Box 装起来<br>
+Box 会涉及堆分配<br>
+运行时通过 vtable 调方法<br>
+todo</p>
+<p><strong>支持+语法</strong></p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
