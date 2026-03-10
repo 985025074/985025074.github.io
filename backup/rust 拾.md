@@ -48,7 +48,7 @@ Some or orthers}
 # dyn and box
 可以分开理解：
 
-Box 是什么
+## Box 是什么
 Box<T> 是 堆上分配 的智能指针。
 
 意思是：
@@ -69,7 +69,7 @@ x 是一个 Box<i32>
 数据太大，不想直接放栈上
 需要递归类型
 需要装 dyn Trait
-dyn 是什么
+## dyn 是什么
 dyn Trait 表示：
 
 “某个实现了这个 trait 的具体类型，但先不告诉你它到底是什么。”
@@ -77,7 +77,7 @@ dyn Trait 表示：
 例如：
 
 
-dyn Error
+## dyn Error
 意思是：
 
 它一定实现了 Error

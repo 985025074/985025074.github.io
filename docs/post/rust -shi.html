@@ -60,7 +60,7 @@ Some or orthers}
 # dyn and box
 可以分开理解：
 
-Box 是什么
+## Box 是什么
 Box<T> 是 堆上分配 的智能指针。">
 <meta property="og:title" content="rust 拾">
 <meta property="og:description" content="# mut 的不同位置
@@ -113,7 +113,7 @@ Some or orthers}
 # dyn and box
 可以分开理解：
 
-Box 是什么
+## Box 是什么
 Box<T> 是 堆上分配 的智能指针。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://985025074.github.io/post/rust%20-shi.html">
@@ -224,8 +224,8 @@ Some or orthers}
 </code></pre>
 <h1>dyn and box</h1>
 <p>可以分开理解：</p>
-<p>Box 是什么<br>
-Box 是 堆上分配 的智能指针。</p>
+<h2>Box 是什么</h2>
+<p>Box 是 堆上分配 的智能指针。</p>
 <p>意思是：</p>
 <p>值本体放在 heap<br>
 栈上只放一个指针<br>
@@ -238,13 +238,13 @@ x 是一个 Box<br>
 常见用途：</p>
 <p>数据太大，不想直接放栈上<br>
 需要递归类型<br>
-需要装 dyn Trait<br>
-dyn 是什么<br>
-dyn Trait 表示：</p>
+需要装 dyn Trait</p>
+<h2>dyn 是什么</h2>
+<p>dyn Trait 表示：</p>
 <p>“某个实现了这个 trait 的具体类型，但先不告诉你它到底是什么。”</p>
 <p>例如：</p>
-<p>dyn Error<br>
-意思是：</p>
+<h2>dyn Error</h2>
+<p>意思是：</p>
 <p>它一定实现了 Error<br>
 但具体可能是 ParseIntError<br>
 也可能是 io::Error<br>
