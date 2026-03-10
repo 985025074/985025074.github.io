@@ -375,7 +375,21 @@ Rust 字符串相加规则就是：</p>
 Box 会涉及堆分配<br>
 运行时通过 vtable 调方法<br>
 todo</p>
-<p><strong>支持+语法</strong></p></div>
+<p><strong>支持+语法</strong></p>
+<h1>test 语法</h1>
+<div class="highlight highlight-source-rust"><pre class="notranslate"><span class="pl-c1">#<span class="pl-kos">[</span>cfg<span class="pl-kos">(</span>test<span class="pl-kos">)</span><span class="pl-kos">]</span></span>
+<span class="pl-k">mod</span> tests <span class="pl-kos">{</span>
+    <span class="pl-c">// TODO: Import `is_even`. You can use a wildcard to import everything in</span>
+    <span class="pl-c">// the outer module.</span>
+
+    <span class="pl-c1">#<span class="pl-kos">[</span>test<span class="pl-kos">]</span></span>
+<span class="pl-c1">#<span class="pl-kos">[</span>should_panic<span class="pl-kos">]</span></span> <span class="pl-c">// optional</span>
+    <span class="pl-k">fn</span> <span class="pl-en">you_can_assert</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-c">// TODO: Test the function `is_even` with some values.</span>
+        <span class="pl-en">assert</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-en">assert</span><span class="pl-en">!</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span></pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
