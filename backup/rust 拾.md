@@ -255,3 +255,18 @@ mod tests {
     }
 }
 ```
+# 几种写法：
+```rs
+fn capitalize_first(input: &str) -> String {
+    let mut chars = input.chars();
+    match chars.next() {
+        None => String::new(),
+        Some(first) => first.to_ascii_uppercase().to_string() + &chars.collect::<String>(),
+    }
+}
+    match chars.next() {
+        None => String::new(),
+        Some(first) => first.to_uppercase().chain(chars).collect(),
+
+```
+collecy知名类型 不然无法推断
