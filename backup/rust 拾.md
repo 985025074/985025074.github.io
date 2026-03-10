@@ -86,7 +86,7 @@ dyn Trait 表示：
 也可能是自定义错误
 这叫 trait object。
 
-为什么常一起写：Box<dyn Error>
+## 为什么常一起写：Box<dyn Error>
 因为 dyn Error 的具体类型不确定，编译期大小也不确定，不能直接写：
 
 
@@ -102,7 +102,7 @@ Box<dyn Error>：拥有这个错误对象
 所以：
 
 
-Box<dyn Error>
+## Box<dyn Error>
 就是：
 
 “一个放在堆上的、实现了 Error trait 的某个具体错误值。”
@@ -120,7 +120,7 @@ dyn
 不要求提前知道具体类型
 结合你前面的例子
 
-fn main() -> Result<(), Box<dyn Error>>
+## fn main() -> Result<(), Box<dyn Error>>
 意思是：
 
 成功返回 ()
