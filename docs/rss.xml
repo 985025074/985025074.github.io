@@ -1,2 +1,55 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Rust &amp; OS</title><link>https://985025074.github.io</link><description>学习笔记 | 操作系统 | 技术探索</description><copyright>Rust &amp; OS</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://985025074.github.io</link></image><lastBuildDate>Mon, 27 Apr 2026 17:37:41 +0000</lastBuildDate><managingEditor>Rust &amp; OS</managingEditor><ttl>60</ttl><webMaster>Rust &amp; OS</webMaster></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Rust &amp; OS</title><link>https://985025074.github.io</link><description>学习笔记 | 操作系统 | 技术探索</description><copyright>Rust &amp; OS</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://985025074.github.io</link></image><lastBuildDate>Tue, 28 Apr 2026 17:52:38 +0000</lastBuildDate><managingEditor>Rust &amp; OS</managingEditor><ttl>60</ttl><webMaster>Rust &amp; OS</webMaster><item><title>minipack</title><link>https://985025074.github.io/post/minipack.html</link><description># minipack 基本流程
+
+# 单个module的解析。</description><guid isPermaLink="true">https://985025074.github.io/post/minipack.html</guid><pubDate>Sat, 14 Mar 2026 14:13:19 +0000</pubDate></item><item><title>单调栈</title><link>https://985025074.github.io/post/dan-diao-zhan.html</link><description>单调栈，用于解决寻找左右两边比他大的 或者比他小的 最值。</description><guid isPermaLink="true">https://985025074.github.io/post/dan-diao-zhan.html</guid><pubDate>Thu, 12 Mar 2026 04:47:35 +0000</pubDate></item><item><title>rust 拾</title><link>https://985025074.github.io/post/rust%20-shi.html</link><description># mut 的不同位置
+```rs
+fn fill_vec(mut vec: Vec&lt;i32&gt;) -&gt; Vec&lt;i32&gt; {
+    //      ^^^ added
+    vec.push(88);
+
+    vec
+}
+
+```
+注意 mut加的 位置所代表的不同含义
+# 结构体快速赋值
+```rs
+        // TODO: Create your own order using the update syntax and template above!
+        // 两种方式 一种是 变量名相同的情况下 不需要 额外 声明键值
+
+        // update syntax
+        let your_order = Order {
+            name: 'Hacker in Rust'.to_string(),
+
+            ..order_template
+        };
+
+```
+# enum 给予类型
+总共两种 （） 和 「」
+```rs
+#[derive(Debug)]
+enum Message {
+    // TODO: Define the different variants used below.
+    Resize { width: u32, height: u32 },
+    Move(Point),
+    Echo(String),
+    ChangeColor(u32, u32, u32),
+    Quit,
+}
+
+
+```
+# Option
+Option 的match
+```
+# move out or not ? derterminate it!
+match option_here{
+Some or orthers}
+
+```
+# dyn and box
+可以分开理解：
+
+## Box 是什么
+Box&lt;T&gt; 是 堆上分配 的智能指针。</description><guid isPermaLink="true">https://985025074.github.io/post/rust%20-shi.html</guid><pubDate>Mon, 09 Mar 2026 13:15:56 +0000</pubDate></item><item><title>test!</title><link>https://985025074.github.io/post/test%21.html</link><description>A。</description><guid isPermaLink="true">https://985025074.github.io/post/test%21.html</guid><pubDate>Mon, 09 Mar 2026 06:51:33 +0000</pubDate></item></channel></rss>
